@@ -3,7 +3,6 @@
 
 int count1 = 0;
 int count2 = 0;
-int led = 2;
 
 void task1(void * parameters)
 {
@@ -21,15 +20,14 @@ void task2(void * parameters)
   {
     Serial.println("Task 2 Counter: ");
     Serial.println(count2++);
-    digitalWrite(led, HIGH);
     vTaskDelay(1000 / portTICK_PERIOD_MS);
-    digitalWrite(led, LOW);
   }  
 }
 
 
 void setup() 
 {
+  Serial.begin(9600);
   xTaskCreate(
     task1,
     "Task 1",
@@ -45,9 +43,7 @@ void setup()
     NULL,
     2,
     NULL
-  );
-  pinMode(led, OUTPUT);
-  Serial.begin(9600);
+  ); 
 }
 
 
